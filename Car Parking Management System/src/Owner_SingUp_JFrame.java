@@ -68,6 +68,12 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
             }
         });
 
+        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTextFieldActionPerformed(evt);
+            }
+        });
+
         maleRadioButton.setText("Male");
         maleRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +280,10 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
     private void firstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_firstNameTextFieldActionPerformed
+
+    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
