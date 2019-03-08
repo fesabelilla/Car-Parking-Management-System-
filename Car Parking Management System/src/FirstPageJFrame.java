@@ -80,7 +80,10 @@ public class FirstPageJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_userButtonActionPerformed
 
     private void ownerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ownerButtonActionPerformed
-        
+
+        Owner_LogIn_JFrame ul = new Owner_LogIn_JFrame();
+        ul.setVisible(true);
+        setVisible(false);        
         
     }//GEN-LAST:event_ownerButtonActionPerformed
 

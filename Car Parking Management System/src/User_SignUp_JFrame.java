@@ -26,6 +26,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
   
   String filename = null;
   byte[] person_img = null ;
+  
     public User_SignUp_JFrame() {
         initComponents();
     }
@@ -141,7 +142,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
             }
         });
 
-        imglbl.setBackground(new java.awt.Color(204, 204, 255));
+        imglbl.setBackground(new java.awt.Color(130, 107, 135));
 
         imgChooseButton.setText("Choose");
         imgChooseButton.addActionListener(new java.awt.event.ActionListener() {
