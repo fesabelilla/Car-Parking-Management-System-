@@ -1,11 +1,17 @@
 
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -27,7 +33,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
     
     String gender;
     
-   int ownerId = 2001;
+ 
   
     public Owner_SingUp_JFrame() {
         initComponents();
@@ -298,11 +304,11 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ParkingSlotsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(femaleRadioButton)
-                        .addComponent(maleRadioButton)))
+                        .addComponent(maleRadioButton))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -423,11 +429,40 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
        pst1.setBytes(9,person_img);
    
        pst1.executeUpdate();
+       
+        /*int i = 0 ;
+            try {
+                FileReader fr = new FileReader("OwnerId.txt");
+                BufferedReader br = new BufferedReader(fr);
+                
+                String str = br.readLine();
+               i =Integer.parseInt(str); 
+               
+               br.close();
+                
+            } catch (Exception e) {
+                System.out.println("Not Found !!!");
+            }
+       */
+       
+         Statement statement = connection.createStatement();  
         
-        OwnersAddress(ownerId);
-        ownerId++;
+        ResultSet resultSet = statement  
+                     .executeQuery("SELECT OwnerId FROM Owner"); 
         
-         JOptionPane.showMessageDialog(this, pst1);
+        String s = null ;
+         while (resultSet.next()) {  
+             //if(resultSet.last()){
+                   s =  resultSet.getString("OwnerId"); 
+                   //OwnersAddress(s);  
+             //}
+                  }  
+        OwnersAddress(s); 
+       // OwnersAddress(ownerId);
+        //ownerId++;
+        
+        
+         JOptionPane.showMessageDialog(this, "SignUp Successfully");
           
         }
         catch(Exception e){
@@ -436,7 +471,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_doneButtonActionPerformed
 
-    public void OwnersAddress(int ownerId){
+    public void OwnersAddress(String s){  
         
         try{
             
@@ -450,7 +485,8 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
    
          PreparedStatement pst2 = connection.prepareStatement(query2);
          
-         pst2.setString(1,Integer.toString(ownerId));
+        // pst2.setString(1,Integer.toString(ownerId));
+         pst2.setString(1,s);
          pst2.setString(2, areaTextField1.getText());
          pst2.setString(3,sectorTextField4.getText());
          pst2.setString(4,rodeNumberTextField3.getText());

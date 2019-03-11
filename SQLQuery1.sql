@@ -21,6 +21,7 @@ CREATE TABLE Users(
     Images image not null 
 );
 
+select* from Users;
 CREATE TABLE Owner(
     OwnerId int IDENTITY(2001,1) NOT NULL PRIMARY KEY,
     UserName varchar (50) NOT NULL,
