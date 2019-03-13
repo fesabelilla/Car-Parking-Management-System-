@@ -1,4 +1,6 @@
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +24,9 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
      */
     public Owner_LogIn_JFrame() {
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);   
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +58,11 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        userNameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userNameTextFieldMouseClicked(evt);
+            }
+        });
 
         signInButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         signInButton.setText("Sign In");
@@ -178,6 +188,11 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
         fp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void userNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextFieldMouseClicked
+        // TODO add your handling code here:
+        //userNameTextField.setText(" ");
+    }//GEN-LAST:event_userNameTextFieldMouseClicked
 
     /**
      * @param args the command line arguments
