@@ -33,13 +33,13 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                      .getConnection(  
                              "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
    
-           String query1 = "SELECT OwnerId,UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,Images FROM Owner";
+           String query1 = "SELECT * FROM Owner";
         
            Statement st  = connection.createStatement();
             ResultSet rs = st.executeQuery(query1);
         Owner owner;
          while(rs.next()){
-             owner = new Owner(rs.getInt("OwnerId") ,rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"),rs.getBytes("Images"));
+             owner = new Owner(rs.getInt("OwnerId"),rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"),rs.getBytes("Images"));
          ownerList.add(owner);
          }
         

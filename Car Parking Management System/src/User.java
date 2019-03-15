@@ -2,8 +2,8 @@
 public class User {
    private int UserId;
    private String UserName,FirstName,LastName,Password,PhoneNumber,LicenceNumber,NIDNumber,Gender,UserType; 
-    
-    public User(int UserId,String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String LicenceNumber,String NIDNumber,String Gender,String UserType){
+   private byte [] picture;
+    public User(int UserId,String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String LicenceNumber,String NIDNumber,String Gender,String UserType,byte[] Images){
         this.UserId = UserId;
         this.UserName = UserName;
         this.FirstName = FirstName;
@@ -14,6 +14,11 @@ public class User {
         this.NIDNumber = NIDNumber;
         this.Gender = Gender;
         this.UserType = UserType;
+        this.picture = Images;
+    }
+
+    public byte[] getImages() {
+        return picture;
     }
 
     public int getUserId() {
