@@ -437,7 +437,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
                 System.out.println("Not Found !!!");
             }
        */
-       //refersh table
+     
        
          Statement statement = connection.createStatement();  
         

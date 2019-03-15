@@ -1,20 +1,23 @@
-
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
 
+    String filename = null;
+    
     public Owner_ControlPanel_JFrame() {
         initComponents();
         show_Owners();
-       show_Owners_address();
+        show_Owners_address();
         //for middel
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
@@ -30,13 +33,13 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                      .getConnection(  
                              "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
    
-           String query1 = "SELECT OwnerId,UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots FROM Owner";
+           String query1 = "SELECT OwnerId,UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,Images FROM Owner";
         
            Statement st  = connection.createStatement();
             ResultSet rs = st.executeQuery(query1);
         Owner owner;
          while(rs.next()){
-             owner = new Owner(rs.getInt("OwnerId") ,rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"));
+             owner = new Owner(rs.getInt("OwnerId") ,rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"),rs.getBytes("Images"));
          ownerList.add(owner);
          }
         
@@ -66,14 +69,11 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                     row[6] = list.get(i).getNIDNumber();
                     row[7] = list.get(i). getGender();
                     row[8] = list.get(i).getParkingSlots();
-                    //row[9] = list.get(i).  
+                    row[9] = list.get(i).getImages();
                     model.addRow(row);
         }
     }
-    
-    
-    
-    
+ 
     public  ArrayList<Owner_address>ownerAddressList(){
   ArrayList <Owner_address> ownerAddressList = new ArrayList<>();
   
@@ -96,10 +96,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-  
-        
-        
-        
+     
   return ownerAddressList;
 }
     
@@ -109,8 +106,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)Owner_address_Table.getModel();
         
         Object[] row = new Object[10];
-        
-        
+  
         System.out.println(list.size());
         
         for(int i = 0 ; i<list.size();i++){
@@ -137,6 +133,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         Owner_address_Table = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
+        Owner_Img_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,6 +145,11 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                 "OwnerId", "UserName", "FirstName", "LastName", "Password", "PhoneNumber", "NIDNumber", "Gender", "ParkingSlots", "Images"
             }
         ));
+        ownerControlpanel_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ownerControlpanel_TableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(ownerControlpanel_Table);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -179,13 +181,8 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(116, 116, 116)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(474, 474, 474))
@@ -194,6 +191,14 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                         .addGap(186, 186, 186)
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(Owner_Img_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,58 +207,43 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(Owner_Img_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        //Owner_ControlPanel_JFrame ocp = new  Owner_ControlPanel_JFrame();
         DefaultTableModel dft1 = (DefaultTableModel)ownerControlpanel_Table.getModel();
         DefaultTableModel dft2 = (DefaultTableModel)Owner_address_Table.getModel();
         dft1.setRowCount(0);
         dft2.setRowCount(0);
         show_Owners();
         show_Owners_address();
+        Owner_Img_Label.setIcon(null);
     }//GEN-LAST:event_refreshButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Owner_ControlPanel_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Owner_ControlPanel_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Owner_ControlPanel_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Owner_ControlPanel_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void ownerControlpanel_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ownerControlpanel_TableMouseClicked
+        int i = ownerControlpanel_Table.getSelectedRow();
+        byte[] img = (ownerList().get(i).getImages());
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(Owner_Img_Label.getWidth(),Owner_Img_Label.getHeight(),Image.SCALE_SMOOTH));
+        Owner_Img_Label.setIcon(imageIcon);    
+    }//GEN-LAST:event_ownerControlpanel_TableMouseClicked
 
-    
+   
+    public static void main(String args[]) {
         
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Owner_ControlPanel_JFrame().setVisible(true);
@@ -265,6 +255,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Owner_Img_Label;
     private javax.swing.JTable Owner_address_Table;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
