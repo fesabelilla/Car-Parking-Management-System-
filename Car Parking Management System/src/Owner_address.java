@@ -35,7 +35,5 @@ this.HouseNumber = HouseNumber;
     public String getHouseNumber() {
         return HouseNumber;
     }
-    
-    
-    
+   
 }

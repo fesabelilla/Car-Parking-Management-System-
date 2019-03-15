@@ -438,11 +438,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
             }
        */
        //refersh table
-        Owner_ControlPanel_JFrame ocp = new  Owner_ControlPanel_JFrame();
-        DefaultTableModel dft = (DefaultTableModel)ocp.ownerControlpanel_Table.getModel();
-        dft.setRowCount(0);
-        ocp.show_Owners();
-
+       
          Statement statement = connection.createStatement();  
         
         ResultSet resultSet = statement  
