@@ -9,7 +9,7 @@ public class SplashClass {
         try {
             for(int i = 0 ; i<101 ; i+=2){
                 Thread.sleep(50);
-                lod.loadLabel.setText(Integer.toString(i)+"%");
+                //lod.loadLabel.setText(Integer.toString(i)+"%");
                 FirstPageJFrame fp = new FirstPageJFrame();
                 if(i==100){
                     lod.dispose();

@@ -51,3 +51,17 @@ HouseNumber VARCHAR(10) NOT NULL
 
 SELECT * FROM OwnersAddress;
 --DROP TABLE OwnersAddress;
+
+CREATE TABLE  ParkingSlot(
+OwnerId int NOT NULL FOREIGN KEY REFERENCES  Owner(OwnerId),
+SloatId int IDENTITY(4001,1) PRIMARY KEY NOT NULL,
+StartingTime varchar(50) null,
+EndingTime varchar(50) null,
+CCTV int null,
+Price decimal not null,
+Caretaker int null
+); 
+
+select * from ParkingSlot;
+
+
