@@ -40,15 +40,15 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("User Name");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Password");
 
-        userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        signInButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        signInButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signInButton.setText("Sign In");
         signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,9 +56,9 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
             }
         });
 
-        UserPasswordField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        UserPasswordField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        signUpButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        signUpButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signUpButton.setText("SignUp");
         signUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +66,7 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
             }
         });
 
-        backButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        backButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -122,52 +122,50 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         try{
-       Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
-             Connection con = DriverManager  
-                     .getConnection(  
-                             "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
-   
-        String sql = "Select * from Users where UserName = ? and Password = ?";
-        PreparedStatement pst = con.prepareStatement(sql);
-        
-        pst.setString(1,userNameTextField.getText());
-         pst.setString(2,UserPasswordField.getText());
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager
+            .getConnection(
+                "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");
 
-        ResultSet rs = pst.executeQuery();
-        if(rs.next()){
-            JOptionPane.showMessageDialog(null,"Username and Password Matched");
-            User_Homepage um = new User_Homepage();
-            um.setVisible(true);
-            setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null,"Username and Password not Correct");
-            userNameTextField.setText("");
-            UserPasswordField.setText("");
-        }
-         con.close();
+            String sql = "Select * from Users where UserName = ? and Password = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1,userNameTextField.getText());
+            pst.setString(2,UserPasswordField.getText());
+
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                String UserName = rs.getString("UserName");
+                String FirstName = rs.getString("FirstName"); 
+	        String LastName  = rs.getString("LastName");
+	        String Password = rs.getString("Password");
+	        String PhoneNumber = rs.getString("PhoneNumber");
+	        String LicenceNumber = rs.getString("LicenceNumber");
+	        String NIDNumber  = rs.getString("NIDNumber");
+	        String Gender = rs.getString("Gender");
+	        String UserType = rs.getString("Gender");
+                byte[] img = rs.getBytes("Images");
+                JOptionPane.showMessageDialog(null,"Username and Password Matched");
+                //User_Homepage um = new User_Homepage(img);
+                User_Homepage um = new User_Homepage();
+                um.User(UserName,FirstName,LastName,Password,PhoneNumber,LicenceNumber,NIDNumber,Gender,UserType,img);
+                um.setVisible(true);
+                setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Username and Password not Correct");
+                userNameTextField.setText("");
+                UserPasswordField.setText("");
+            }
+            con.close();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-        
-    
-        
-        
-    }//GEN-LAST:event_signInButtonActionPerformed
 
-    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        // TODO add your handling code here:
-       // userNameTextField.setText(" ");
-        //UserPasswordField.setText("");
-        User_SignUp_JFrame us = new User_SignUp_JFrame();
-        us.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_signUpButtonActionPerformed
+    }//GEN-LAST:event_signInButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -176,9 +174,15 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+        // TODO add your handling code here:
+        // userNameTextField.setText(" ");
+        //UserPasswordField.setText("");
+        User_SignUp_JFrame us = new User_SignUp_JFrame();
+        us.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_signUpButtonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
