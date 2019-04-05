@@ -336,8 +336,8 @@ public class User_Homepage extends javax.swing.JFrame {
                      .getConnection(  
                              "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
    
-          String query1 = "select Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId  where OwnersAddress.Area = ? or OwnersAddress.Sector = ? or OwnersAddress.RodeNumber = ?";
-          //(select OwnerId from  ParkingSlot where Reserved = 0) 
+          String query1 = "select Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId  where OwnersAddress.Area = ? and OwnersAddress.Sector = ? and OwnersAddress.RodeNumber = ? and Owner.OwnerId  in (select OwnerId from  ParkingSlot where Reserved = 0)";
+          //and Owner.OwnerId  in (select OwnerId from  ParkingSlot where Reserved = 0)
            //String query1 = "SELECT Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId WHERE CONCAT('Owner.PhoneNumber','Owner.FirstName','Owner.Price','OwnersAddress.Area','OwnersAddress.Sector','OwnersAddress.RodeNumber','OwnersAddress.HouseNumber') LIKE '%"+ValToSearch+"%'";
            
            PreparedStatement pst = connection.prepareStatement(query1);

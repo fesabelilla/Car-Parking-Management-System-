@@ -42,8 +42,8 @@ CREATE TABLE Owner(
 	
 );
 
-SELECT * FROM Owner;
-DROP TABLE Owner;
+--SELECT * FROM Owner;
+--DROP TABLE Owner;
 
 CREATE TABLE OwnersAddress(
 OwnerId int NOT NULL FOREIGN KEY REFERENCES  Owner(OwnerId),
@@ -55,18 +55,19 @@ HouseNumber VARCHAR(50) NOT NULL
 ); 
 
 --INSERT INTO OwnersAddress VALUES (2002,'Niketan','NiketanBazar','32b','339bc');
-INSERT INTO OwnersAddress VALUES (2002,'Niketan','Niketan Bazar','32b','339bc');
-SELECT * FROM OwnersAddress;
-DROP TABLE OwnersAddress;
+--INSERT INTO OwnersAddress VALUES (2002,'Niketan','Niketan Bazar','32b','339bc');
+--SELECT * FROM OwnersAddress;
+--DROP TABLE OwnersAddress;
 
 Select * from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId where Owner.UserName = 'zahid';
 
 
-select Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId ;
+--select Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId;
 
-
-
-
+select Owner.PhoneNumber,Owner.FirstName,Owner.Price,OwnersAddress.Area,OwnersAddress.Sector,OwnersAddress.RodeNumber,OwnersAddress.HouseNumber from 
+Owner full join OwnersAddress 
+on Owner.OwnerId = OwnersAddress.OwnerId
+where OwnersAddress.Area = 'Modhubagh' and Owner.OwnerId  in (select OwnerId from  ParkingSlot where Reserved = 0);
 
 
 SELECT OwnersAddress.OwnerId,AddressId,Area,Sector,RodeNumber,HouseNumber FROM OwnersAddress LEFT JOIN Owner ON OwnersAddress.OwnerId = Owner.OwnerId;
@@ -91,8 +92,11 @@ ALTER TABLE ParkingSlot ADD CONSTRAINT Reserved DEFAULT 0 FOR Reserved;
 insert into ParkingSlot values (2001,'014897249','85873','3',' ',10);
 insert into ParkingSlot values (2002,'014897249','','',' ',10);
 
-select * from ParkingSlot;
-DROP TABLE ParkingSlot;
+--update ParkingSlot set Reserved = 1 where OwnerId = 2001;
+
+
+--select * from ParkingSlot;
+--DROP TABLE ParkingSlot;
 
 CREATE TABLE Uses(
 Users int NOT NULL FOREIGN KEY REFERENCES  Users(UserID),

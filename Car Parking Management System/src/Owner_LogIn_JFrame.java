@@ -1,4 +1,3 @@
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -179,9 +178,20 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
             oh.Owner(UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,img,Area,Sector,RodeNumber,HouseNumber);
            // owner_address(OwnerId);
            
-          // String sql1 = "Select * from Owner where UserName = ? and Password = ?";
-           
-           
+          String sql1 = "Select * from ParkingSlot where OwnerId = ?";
+          PreparedStatement pst1 = con.prepareStatement(sql1);
+           pst1.setInt(1, OwnerId);
+           rs = pst1.executeQuery();
+           if(rs.next()){
+               //slotReservedTextField
+               int Reserved = rs.getInt("Reserved");
+               if(Reserved == 0){
+                   oh.slotReservedTextField.setText("Free");
+               }else{
+                   oh.slotReservedTextField.setText("Not Free");
+               }
+               
+           }
            
            
             oh.setVisible(true);
