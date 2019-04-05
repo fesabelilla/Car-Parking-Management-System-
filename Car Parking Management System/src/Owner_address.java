@@ -1,4 +1,3 @@
-
 public class Owner_address {
 private int OwnerId,AddressId;
  private  String Area,Sector,RodeNumber,HouseNumber;

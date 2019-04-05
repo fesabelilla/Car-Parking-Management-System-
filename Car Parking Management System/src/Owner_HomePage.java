@@ -1,22 +1,27 @@
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Asus
- */
 public class Owner_HomePage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Owner_HomePage
-     */
+        String UserName;  
+	String FirstName ;
+	String LastName ;
+	String Password ;
+	String PhoneNumber; 
+	String NIDNumber ;
+	String Gender ;
+	int ParkingSlots;
+        byte[] img ;
+        
+        String Area ;
+        String Sector; 
+        String RodeNumber; 
+        String HouseNumber;
+   
+        String name;
     public Owner_HomePage() {
         initComponents();
         Toolkit toolkit = getToolkit();
@@ -24,12 +29,41 @@ public class Owner_HomePage extends javax.swing.JFrame {
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);   
     }
 
+    public void Owner(String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String NIDNumber ,String Gender ,int ParkingSlots,byte[]img,String Area,String Sector, String RodeNumber , String HouseNumber){
+        this.UserName = UserName;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.Password = Password;
+        this.PhoneNumber = PhoneNumber;
+        this.NIDNumber = NIDNumber;
+        this.Gender = Gender;
+        this.ParkingSlots = ParkingSlots;
+        this.img = img;
+        this.Area = Area;
+        this.Sector = Sector;
+        this.RodeNumber = RodeNumber;
+        this.HouseNumber = HouseNumber; 
+        
+         
+    }
+             
+   /* public void Address(String Area,String Sector, String RodeNumber , String HouseNumber){
+        this.Area = Area;
+        this.Sector = Sector;
+        this.RodeNumber = RodeNumber;
+        this.HouseNumber = HouseNumber; 
+        
+        System.out.println(this.Area +" "+ this.Sector+" " + this.RodeNumber +" "+this.HouseNumber+" Rec" );
+    }*/
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         profileBtn = new javax.swing.JButton();
         LogOutButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        slotReservedTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,21 +83,36 @@ public class Owner_HomePage extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel1.setText("Is Your Slot Reserved");
+
+        slotReservedTextField.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 675, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LogOutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LogOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(profileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128)
+                .addComponent(slotReservedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(profileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
+                .addGap(111, 111, 111)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(slotReservedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(LogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -71,8 +120,33 @@ public class Owner_HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
-        Owner_Profile of = new Owner_Profile();
-        of.setVisible(true);
+         
+        Owner_Profile op = new Owner_Profile();
+        op.userNameTextField.setText(UserName);
+        op.firstNameTextField.setText(FirstName);
+        op.lastNameTextField.setText(LastName);
+        op.passwordTextField.setText(Password);
+        op.phoneNumberTextField.setText(PhoneNumber);
+        op.nidNumberTextField.setText(NIDNumber);
+        if(Gender.equals("Male")){
+            op.maleRadioButton.setSelected(true);
+        }
+        else{
+            op.femaleRadioButton.setSelected(true);
+        }
+       op.ParkingSlotsTextField.setText(Integer.toString(ParkingSlots));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(op.ownerImglbl.getWidth(),op.ownerImglbl.getHeight(),Image.SCALE_SMOOTH));
+        op.ownerImglbl.setIcon(imageIcon); 
+
+         //System.out.println(Area +" "+ Sector +" "+ RodeNumber+" " + HouseNumber+" print" );
+        
+        op.areaTextField.setText(Area);
+        op.sectorTextField4.setText(Sector);
+        op.rodeNumberTextField3.setText(RodeNumber);
+        op.houseNumberTextField2.setText(HouseNumber);
+       
+             
+        op.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_profileBtnActionPerformed
 
@@ -82,34 +156,8 @@ public class Owner_HomePage extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_LogOutButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Owner_HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Owner_HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Owner_HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Owner_HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Owner_HomePage().setVisible(true);
@@ -119,6 +167,8 @@ public class Owner_HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogOutButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton profileBtn;
+    private javax.swing.JTextField slotReservedTextField;
     // End of variables declaration//GEN-END:variables
 }

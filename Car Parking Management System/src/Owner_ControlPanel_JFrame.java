@@ -41,7 +41,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(query1);
         Owner owner;
          while(rs.next()){
-             owner = new Owner(rs.getInt("OwnerId"),rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"),rs.getBytes("Images"));
+             owner = new Owner(rs.getInt("OwnerId"),rs.getString("UserName"),rs.getString("FirstName"),rs.getString( "LastName"),rs.getString("Password"),rs.getString("PhoneNumber"),rs.getString("NIDNumber"),rs.getString("Gender"),rs.getString("ParkingSlots"),rs.getInt("Price"),rs.getBytes("Images"));
          ownerList.add(owner);
          }
         
@@ -57,7 +57,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel)ownerControlpanel_Table.getModel();
         
-        Object[] row = new Object[10];
+        Object[] row = new Object[11];
         
         System.out.println(list.size());
         
@@ -71,7 +71,8 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
                     row[6] = list.get(i).getNIDNumber();
                     row[7] = list.get(i). getGender();
                     row[8] = list.get(i).getParkingSlots();
-                    row[9] = list.get(i).getImages();
+                    row[9] = list.get(i).getPrice();
+                    row[10] = list.get(i).getImages();
                     model.addRow(row);
         }
     }
@@ -149,7 +150,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "OwnerId", "UserName", "FirstName", "LastName", "Password", "PhoneNumber", "NIDNumber", "Gender", "ParkingSlots", "Images"
+                "OwnerId", "UserName", "FirstName", "LastName", "Password", "PhoneNumber", "NIDNumber", "Gender", "ParkingSlots", "Price", "Images"
             }
         ));
         ownerControlpanel_Table.addMouseListener(new java.awt.event.MouseAdapter() {

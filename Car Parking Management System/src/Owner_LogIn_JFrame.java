@@ -7,21 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Asus
- */
 public class Owner_LogIn_JFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Owner_LogIn_JFrame
-     */
+
     public Owner_LogIn_JFrame() {
         initComponents();
         Toolkit toolkit = getToolkit();
@@ -155,17 +143,47 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
             .getConnection(
                 "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");
 
-            String sql = "Select * from Owner where UserName = ? and Password = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
+           // String sql = "Select * from Owner where UserName = ? and Password = ?";
+           
+           String sql = "Select * from Owner full join OwnersAddress on Owner.OwnerId = OwnersAddress.OwnerId where Owner.UserName = ? and Password = ?";
+           
+           
+           
+           PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1,userNameTextField.getText());
             pst.setString(2,UserPasswordField.getText());
 
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null,"Username and Password Matched");
+            if(rs.next()){ 
+                int OwnerId = rs.getInt("OwnerId");
+                String UserName = rs.getString("UserName");
+                String FirstName = rs.getString("FirstName"); 
+	        String LastName  = rs.getString("LastName");
+	        String Password = rs.getString("Password");
+	        String PhoneNumber = rs.getString("PhoneNumber");
+	        String NIDNumber  = rs.getString("NIDNumber");
+	        String Gender = rs.getString("Gender");
+	        int ParkingSlots  = rs.getInt("ParkingSlots");
+                byte[] img = rs.getBytes("Images");
+                String Area = rs.getString("Area") ;
+                String Sector = rs.getString("Sector"); 
+                String RodeNumber = rs.getString("RodeNumber"); 
+                String HouseNumber = rs.getString("HouseNumber");
                 
-            Owner_HomePage oh = new Owner_HomePage();
+               Owner_HomePage oh = new Owner_HomePage(); 
+            //String sql1 = "SELECT OwnersAddress.OwnerId,AddressId,Area,Sector,RodeNumber,HouseNumber FROM OwnersAddress LEFT JOIN Owner ON OwnersAddress.OwnerId = Owner.OwnerId;";
+                  
+            JOptionPane.showMessageDialog(null,"Username and Password Matched");
+            
+            oh.Owner(UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,img,Area,Sector,RodeNumber,HouseNumber);
+           // owner_address(OwnerId);
+           
+          // String sql1 = "Select * from Owner where UserName = ? and Password = ?";
+           
+           
+           
+           
             oh.setVisible(true);
             setVisible(false);    
             }else{
@@ -182,47 +200,63 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_signInButtonActionPerformed
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+   /* public void owner_address(int OwnerId){   
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager
+            .getConnection(
+                "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");
+
+            String sql1 = "SELECT * FROM OwnersAddress WHERE OwnerId = ? ";
+            PreparedStatement pst1 = con.prepareStatement(sql1); 
+             pst1.setInt(1,OwnerId);
+            ResultSet address_rs = pst1.executeQuery();
+            
+        String Area ;
+        String Sector; 
+        String RodeNumber; 
+        String HouseNumber;
+            
+            
+            Owner_HomePage oh = new Owner_HomePage(); 
+            if(address_rs.next()){
+                 Area = address_rs.getString("Area");
+                Sector = address_rs.getString("Sector");
+                RodeNumber = address_rs.getString("RodeNumber");
+                HouseNumber = address_rs.getString("HouseNumber");
+                
+                 System.out.println(Area +" "+ Sector+" "+RodeNumber+" "+HouseNumber+" value");
+                
+               
+                
+               oh.Address(Area,Sector,RodeNumber,HouseNumber); 
+               
+              
+        }
+           
+        }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+        }
+    } */
         
+   
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+
          FirstPageJFrame fp = new FirstPageJFrame();
         fp.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void userNameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextFieldMouseClicked
-        // TODO add your handling code here:
-        //userNameTextField.setText(" ");
+               //userNameTextField.setText(" ");
     }//GEN-LAST:event_userNameTextFieldMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Owner_LogIn_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Owner_LogIn_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Owner_LogIn_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Owner_LogIn_JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Owner_LogIn_JFrame().setVisible(true);

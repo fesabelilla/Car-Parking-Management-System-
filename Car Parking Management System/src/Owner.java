@@ -3,8 +3,9 @@ public class Owner {
     private int OwnerId ;
     
     private String UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots;
+    int Price;
     byte[] picture;
-    public Owner(int OwnerId ,String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String NIDNumber,String Gender,String ParkingSlots,byte[] Images) {
+    public Owner(int OwnerId ,String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String NIDNumber,String Gender,String ParkingSlots,int Price,byte[] Images) {
     this.OwnerId = OwnerId;
     this.UserName = UserName;
     this.FirstName = FirstName;
@@ -14,6 +15,7 @@ public class Owner {
     this.NIDNumber = NIDNumber;
     this.Gender = Gender;
     this.ParkingSlots = ParkingSlots;
+    this.Price = Price;
     this.picture = Images;
     }
     
@@ -54,11 +56,12 @@ public class Owner {
     public String getGender() {
         return Gender;
     }
+    public int getPrice(){
+        return Price;
+    }
 
     public String getParkingSlots() {
         return ParkingSlots;
     }
-    
-    
-    
+  
 }

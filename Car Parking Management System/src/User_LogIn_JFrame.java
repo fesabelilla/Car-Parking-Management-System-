@@ -145,7 +145,7 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
 	        String LicenceNumber = rs.getString("LicenceNumber");
 	        String NIDNumber  = rs.getString("NIDNumber");
 	        String Gender = rs.getString("Gender");
-	        String UserType = rs.getString("Gender");
+	        String UserType = rs.getString("UserType");
                 byte[] img = rs.getBytes("Images");
                 JOptionPane.showMessageDialog(null,"Username and Password Matched");
                 //User_Homepage um = new User_Homepage(img);
