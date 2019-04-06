@@ -305,7 +305,7 @@ public class User_Homepage extends javax.swing.JFrame {
         up.phoneNumberTextField.setText(PhoneNumber);
         up.nidNumberTextField.setText(NIDNumber);
         up.licenceNumberTextField.setText(LicenceNumber);
-        if(Gender.equals("Male")){
+       if(Gender.equals("Male")){
             up.maleRadioButton.setSelected(true);
         }
         else{
@@ -317,14 +317,12 @@ public class User_Homepage extends javax.swing.JFrame {
         else{
               up.hourBasedRadioButton.setSelected(true);
         }
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(up.profileImg.getWidth(),up.profileImg.getHeight(),Image.SCALE_SMOOTH));
-        up.profileImg.setIcon(imageIcon); 
+      ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(up.profileImg.getWidth(),up.profileImg.getHeight(),Image.SCALE_SMOOTH));
+       up.profileImg.setIcon(imageIcon); 
         up.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_profileButtonActionPerformed
 
-    
-        
 
     
     public  ArrayList<UserSearchGetValue>OwnerList(){
