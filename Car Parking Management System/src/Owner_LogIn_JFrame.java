@@ -127,9 +127,6 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        // TODO add your handling code here:
-        // userNameTextField.setText(" ");
-        //UserPasswordField.setText("");
         Owner_SingUp_JFrame us = new Owner_SingUp_JFrame();
         us.setVisible(true);
         setVisible(false);
@@ -169,31 +166,26 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
                 String Sector = rs.getString("Sector"); 
                 String RodeNumber = rs.getString("RodeNumber"); 
                 String HouseNumber = rs.getString("HouseNumber");
+                int Price = rs.getInt("Price");
                 
-               Owner_HomePage oh = new Owner_HomePage(); 
+                Owner_HomePage oh = new Owner_HomePage();
             //String sql1 = "SELECT OwnersAddress.OwnerId,AddressId,Area,Sector,RodeNumber,HouseNumber FROM OwnersAddress LEFT JOIN Owner ON OwnersAddress.OwnerId = Owner.OwnerId;";
-                  
-            JOptionPane.showMessageDialog(null,"Username and Password Matched");
+              
+                int Reserved = 500;
+                JOptionPane.showMessageDialog(null,"Username and Password Matched");
             
-            oh.Owner(UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,img,Area,Sector,RodeNumber,HouseNumber);
-           // owner_address(OwnerId);
-           
-          String sql1 = "Select * from ParkingSlot where OwnerId = ?";
-          PreparedStatement pst1 = con.prepareStatement(sql1);
-           pst1.setInt(1, OwnerId);
-           rs = pst1.executeQuery();
-           if(rs.next()){
-               //slotReservedTextField
-               int Reserved = rs.getInt("Reserved");
-               if(Reserved == 0){
-                   oh.slotReservedTextField.setText("Free");
-               }else{
-                   oh.slotReservedTextField.setText("Not Free");
+                String sql1 = "Select * from ParkingSlot where OwnerId = ?";
+                PreparedStatement pst1 = con.prepareStatement(sql1);
+                pst1.setInt(1, OwnerId);
+               rs = pst1.executeQuery();
+              if(rs.next()){
+               Reserved = rs.getInt("Reserved");
+               System.out.println(rs.getInt("Reserved")+" Login");
                }
-               
-           }
-           
-           
+            
+            OWNERPROFILE_FINAL OPF = new OWNERPROFILE_FINAL(UserName, FirstName, LastName, Password, PhoneNumber, NIDNumber, Gender, ParkingSlots, img, Area, Sector, RodeNumber, HouseNumber, Reserved,Price);
+             oh = new Owner_HomePage(OPF);
+
             oh.setVisible(true);
             setVisible(false);    
             }else{
@@ -209,48 +201,7 @@ public class Owner_LogIn_JFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_signInButtonActionPerformed
-
-   /* public void owner_address(int OwnerId){   
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager
-            .getConnection(
-                "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");
-
-            String sql1 = "SELECT * FROM OwnersAddress WHERE OwnerId = ? ";
-            PreparedStatement pst1 = con.prepareStatement(sql1); 
-             pst1.setInt(1,OwnerId);
-            ResultSet address_rs = pst1.executeQuery();
-            
-        String Area ;
-        String Sector; 
-        String RodeNumber; 
-        String HouseNumber;
-            
-            
-            Owner_HomePage oh = new Owner_HomePage(); 
-            if(address_rs.next()){
-                 Area = address_rs.getString("Area");
-                Sector = address_rs.getString("Sector");
-                RodeNumber = address_rs.getString("RodeNumber");
-                HouseNumber = address_rs.getString("HouseNumber");
-                
-                 System.out.println(Area +" "+ Sector+" "+RodeNumber+" "+HouseNumber+" value");
-                
-               
-                
-               oh.Address(Area,Sector,RodeNumber,HouseNumber); 
-               
-              
-        }
-           
-        }
-            catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-        }
-    } */
-        
-   
+ 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 
          FirstPageJFrame fp = new FirstPageJFrame();

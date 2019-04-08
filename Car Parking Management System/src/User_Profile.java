@@ -1,32 +1,64 @@
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Asus
- */
 public class User_Profile extends javax.swing.JFrame {
 
-    /**
-     * Creates new form User_Profile
-     */
-  
-    public User_Profile() {
-        initComponents();
+    USERPROFILE_FINAL uf;
+    
         
+        public User_Profile() {
+        initComponents();
+   
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);
     }
 
+    User_Profile(USERPROFILE_FINAL uf) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initComponents();
+        this.uf= uf;
+        ShowProfile();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);
+    
+    
+    }
+        
      
+
+    public  void ShowProfile(){ 
+        
+        userNameTextField.setText(uf.getUserName());
+        firstNameTextField.setText(uf.getFirstName());
+        lastNameTextField.setText(uf.getLastName());
+        passwordTextField.setText(uf.getPassword());
+        phoneNumberTextField.setText(uf.getPhoneNumber());
+        nidNumberTextField.setText(uf.getNIDNumber());
+        licenceNumberTextField.setText(uf.getLicenceNumber());
+       if(uf.getGender().equals("Male")){
+            maleRadioButton.setSelected(true);
+        }
+        else{
+            femaleRadioButton.setSelected(true);
+        }
+        if(uf.getUserType().equals("Monthly Based")){
+            monthlyBasedRadioButton.setSelected(true);
+        }
+        else{
+              hourBasedRadioButton.setSelected(true);
+        }
+      ImageIcon imageIcon = new ImageIcon(new ImageIcon(uf.getImg()).getImage().getScaledInstance(profileImg.getWidth(),profileImg.getHeight(),Image.SCALE_SMOOTH));
+      profileImg.setIcon(imageIcon); 
+        
+    }
+    
+    
+    
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -310,39 +342,14 @@ public class User_Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_monthlyBasedRadioButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        User_Homepage uh = new User_Homepage();
+        User_Homepage uh = new User_Homepage(uf);
         uh.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(User_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(User_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(User_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(User_Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new User_Profile().setVisible(true);
@@ -352,9 +359,9 @@ public class User_Profile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
-    public javax.swing.JRadioButton femaleRadioButton;
-    public javax.swing.JTextField firstNameTextField;
-    public javax.swing.JRadioButton hourBasedRadioButton;
+    private javax.swing.JRadioButton femaleRadioButton;
+    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JRadioButton hourBasedRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -366,15 +373,15 @@ public class User_Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JTextField lastNameTextField;
-    public javax.swing.JTextField licenceNumberTextField;
+    private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JTextField licenceNumberTextField;
     private javax.swing.JButton logoutButton;
-    public javax.swing.JRadioButton maleRadioButton;
-    public javax.swing.JRadioButton monthlyBasedRadioButton;
-    public javax.swing.JTextField nidNumberTextField;
-    public javax.swing.JTextField passwordTextField;
-    public javax.swing.JTextField phoneNumberTextField;
-    public javax.swing.JLabel profileImg;
-    public javax.swing.JTextField userNameTextField;
+    private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JRadioButton monthlyBasedRadioButton;
+    private javax.swing.JTextField nidNumberTextField;
+    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JTextField phoneNumberTextField;
+    private javax.swing.JLabel profileImg;
+    private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }

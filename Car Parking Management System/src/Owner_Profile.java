@@ -1,7 +1,11 @@
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class Owner_Profile extends javax.swing.JFrame {
+    
+    OWNERPROFILE_FINAL OPF;
     
     public Owner_Profile() {
         initComponents();
@@ -10,7 +14,49 @@ public class Owner_Profile extends javax.swing.JFrame {
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);   
     }
 
+    public Owner_Profile(OWNERPROFILE_FINAL OPF) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initComponents(); 
+        this.OPF = OPF;
+        
+        ShowProfile();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);  
+       
+    }
+
     @SuppressWarnings("unchecked")
+
+     public void ShowProfile(){
+         System.out.println(OPF.getUserName());
+        userNameTextField.setText(OPF.getUserName());
+        firstNameTextField.setText(OPF.getFirstName());
+        lastNameTextField.setText(OPF.getLastName());
+        passwordTextField.setText(OPF.getPassword());
+        phoneNumberTextField.setText(OPF.getPhoneNumber());
+        nidNumberTextField.setText(OPF.getNIDNumber());
+        if(OPF.getGender().equals("Male")){
+            maleRadioButton.setSelected(true);
+        }
+        else{
+            femaleRadioButton.setSelected(true);
+        }
+       ParkingSlotsTextField.setText(Integer.toString(OPF.getParkingSlots()));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(OPF.getImg()).getImage().getScaledInstance(ownerImglbl.getWidth(),ownerImglbl.getHeight(),Image.SCALE_SMOOTH));
+        ownerImglbl.setIcon(imageIcon); 
+
+         //System.out.println(Area +" "+ Sector +" "+ RodeNumber+" " + HouseNumber+" print" );
+        
+        areaTextField.setText(OPF.getArea());
+        sectorTextField4.setText(OPF.getSector());
+        rodeNumberTextField3.setText(OPF.getRodeNumber());
+        houseNumberTextField2.setText(OPF.getHouseNumber());
+        slotPriceTextField.setText(Integer.toString(OPF.getPrice()));
+       
+}
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -46,7 +92,7 @@ public class Owner_Profile extends javax.swing.JFrame {
         ownerImglbl = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        slotReservedTextField = new javax.swing.JTextField();
+        slotPriceTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +111,7 @@ public class Owner_Profile extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Gender");
 
-        firstNameTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        firstNameTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstNameTextFieldActionPerformed(evt);
@@ -81,7 +127,7 @@ public class Owner_Profile extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Sector");
 
-        lastNameTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lastNameTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastNameTextFieldActionPerformed(evt);
@@ -102,23 +148,23 @@ public class Owner_Profile extends javax.swing.JFrame {
 
         sectorTextField4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         userNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameTextFieldActionPerformed(evt);
             }
         });
 
-        passwordTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        passwordTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("ParkingSlot");
 
-        phoneNumberTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        phoneNumberTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        ParkingSlotsTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        ParkingSlotsTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        nidNumberTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        nidNumberTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         maleRadioButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         maleRadioButton.setText("Male");
@@ -182,9 +228,9 @@ public class Owner_Profile extends javax.swing.JFrame {
         );
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel12.setText("Your Slot ");
+        jLabel12.setText("Slot  Price");
 
-        slotReservedTextField.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        slotPriceTextField.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,11 +241,21 @@ public class Owner_Profile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 828, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 789, Short.MAX_VALUE)
                         .addComponent(LogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(285, 285, 285)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(518, 518, 518)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,44 +268,31 @@ public class Owner_Profile extends javax.swing.JFrame {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(211, 211, 211)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(nidNumberTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
-                                    .addComponent(phoneNumberTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(firstNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(maleRadioButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(femaleRadioButton))
-                                    .addComponent(userNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ParkingSlotsTextField))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(nidNumberTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                                        .addComponent(phoneNumberTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lastNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(firstNameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(userNameTextField, javax.swing.GroupLayout.Alignment.LEADING))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(285, 285, 285)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(518, 518, 518)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(rodeNumberTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                        .addComponent(houseNumberTextField2)
-                                        .addComponent(sectorTextField4))
-                                    .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
-                                .addComponent(slotReservedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(ParkingSlotsTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(maleRadioButton)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(femaleRadioButton)))
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(slotPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rodeNumberTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(houseNumberTextField2)
+                            .addComponent(sectorTextField4)
+                            .addComponent(areaTextField))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -277,12 +320,8 @@ public class Owner_Profile extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(slotReservedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
                         .addComponent(phoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -291,8 +330,10 @@ public class Owner_Profile extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ParkingSlotsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
+                    .addComponent(ParkingSlotsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(slotPriceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(femaleRadioButton)
                     .addComponent(maleRadioButton)
@@ -331,7 +372,7 @@ public class Owner_Profile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void firstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameTextFieldActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_firstNameTextFieldActionPerformed
 
     private void lastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameTextFieldActionPerformed
@@ -345,11 +386,9 @@ public class Owner_Profile extends javax.swing.JFrame {
     private void maleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioButtonActionPerformed
 
     }//GEN-LAST:event_maleRadioButtonActionPerformed
-
+ 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        
-        
-        Owner_HomePage oh = new Owner_HomePage();
+        Owner_HomePage oh = new Owner_HomePage(OPF);
         oh.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -373,11 +412,11 @@ public class Owner_Profile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
     private javax.swing.JButton LogOutButton;
-    public javax.swing.JTextField ParkingSlotsTextField;
-    public javax.swing.JTextField areaTextField;
-    public javax.swing.JRadioButton femaleRadioButton;
-    public javax.swing.JTextField firstNameTextField;
-    public javax.swing.JTextField houseNumberTextField2;
+    private javax.swing.JTextField ParkingSlotsTextField;
+    private javax.swing.JTextField areaTextField;
+    private javax.swing.JRadioButton femaleRadioButton;
+    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JTextField houseNumberTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -394,15 +433,15 @@ public class Owner_Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JTextField lastNameTextField;
-    public javax.swing.JRadioButton maleRadioButton;
-    public javax.swing.JTextField nidNumberTextField;
+    private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JTextField nidNumberTextField;
     public javax.swing.JLabel ownerImglbl;
-    public javax.swing.JTextField passwordTextField;
-    public javax.swing.JTextField phoneNumberTextField;
-    public javax.swing.JTextField rodeNumberTextField3;
-    public javax.swing.JTextField sectorTextField4;
-    public javax.swing.JTextField slotReservedTextField;
-    public javax.swing.JTextField userNameTextField;
+    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JTextField phoneNumberTextField;
+    private javax.swing.JTextField rodeNumberTextField3;
+    private javax.swing.JTextField sectorTextField4;
+    public javax.swing.JTextField slotPriceTextField;
+    private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,55 +1,54 @@
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 
 public class User_Homepage extends javax.swing.JFrame {
+USERPROFILE_FINAL uf ;
+   
+int totalBill;
 
-        String UserName;  
-	String FirstName ;
-	String LastName ;
-	String Password ;
-	String PhoneNumber;
-	String LicenceNumber; 
-	String NIDNumber ;
-	String Gender ;
-	String UserType;
-        byte[] img ;
+int UserID;
+
     public User_Homepage() {
         initComponents();
-        
-        //OwnerList();
-        //show_Owners();
+
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);  
     }
 
-    public void User(String UserName,String FirstName,String LastName,String Password ,String PhoneNumber,String LicenceNumber,String NIDNumber ,String Gender ,String UserType,byte[] img){
-        this.UserName = UserName;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Password = Password;
-        this.PhoneNumber = PhoneNumber;
-        this.LicenceNumber = LicenceNumber;
-        this.NIDNumber = NIDNumber;
-        this.Gender = Gender;
-        this.UserType = UserType;
-        this.img = img;
+   public User_Homepage(USERPROFILE_FINAL uf) {
+       
+        initComponents();
+        this.uf= uf;
+       
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);  
     }
+
+    
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -62,7 +61,7 @@ public class User_Homepage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        doneButton = new javax.swing.JButton();
         ownerPhoneNumberTextField = new javax.swing.JTextField();
         startingTimeTextField = new javax.swing.JTextField();
         DurationTextField = new javax.swing.JTextField();
@@ -77,6 +76,11 @@ public class User_Homepage extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        endingTimeTextField = new javax.swing.JTextField();
+        totalBillTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        historyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,10 +115,15 @@ public class User_Homepage extends javax.swing.JFrame {
         jLabel4.setText("Duration");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Price");
+        jLabel5.setText("Per Hour Price");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Done");
+        doneButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        doneButton.setText("Done");
+        doneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneButtonActionPerformed(evt);
+            }
+        });
 
         ownerPhoneNumberTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
@@ -146,7 +155,7 @@ public class User_Homepage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Owner Phone Number", "Name", "Area", "Sector", "RodeNumber", "HouseNumber", "Price"
+                "Owner Phone Number", "Name", "Area", "Sector", "RodeNumber", "HouseNumber", "Per Hour Price"
             }
         ));
         User_Search_Table.setGridColor(new java.awt.Color(0, 51, 51));
@@ -179,10 +188,36 @@ public class User_Homepage extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("Ending Time");
+
+        endingTimeTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        totalBillTextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Total Bill");
+
+        historyButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        historyButton.setText("History");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(logoutButton)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(449, 449, 449))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -191,44 +226,40 @@ public class User_Homepage extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logoutButton)
-                        .addGap(35, 35, 35))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ownerPhoneNumberTextField)
+                            .addComponent(startingTimeTextField)
+                            .addComponent(DurationTextField)
+                            .addComponent(priceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                            .addComponent(endingTimeTextField))
+                        .addGap(87, 87, 87)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(totalBillTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(54, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SectorTextField)
-                            .addComponent(areaTextField)
-                            .addComponent(roadNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(116, 116, 116)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ownerPhoneNumberTextField)
-                                    .addComponent(startingTimeTextField)
-                                    .addComponent(DurationTextField)
-                                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(448, 448, 448)
-                .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
-                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(240, 240, 240))
+                            .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(SectorTextField)
+                                .addComponent(areaTextField)
+                                .addComponent(roadNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(240, 240, 240))
+                            .addComponent(profileButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(historyButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,15 +269,21 @@ public class User_Homepage extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(areaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(roadNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(roadNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,19 +300,26 @@ public class User_Homepage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startingTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(endingTimeTextField)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DurationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalBillTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,41 +332,32 @@ public class User_Homepage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 80, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
-        User_Profile up = new User_Profile();
-        up.userNameTextField.setText(UserName);
-        up.firstNameTextField.setText(FirstName);
-        up.lastNameTextField.setText(LastName);
-        up.passwordTextField.setText(Password);
-        up.phoneNumberTextField.setText(PhoneNumber);
-        up.nidNumberTextField.setText(NIDNumber);
-        up.licenceNumberTextField.setText(LicenceNumber);
-       if(Gender.equals("Male")){
-            up.maleRadioButton.setSelected(true);
-        }
-        else{
-            up.femaleRadioButton.setSelected(true);
-        }
-        if(UserType.equals("Monthly Based")){
-             up.monthlyBasedRadioButton.setSelected(true);
-        }
-        else{
-              up.hourBasedRadioButton.setSelected(true);
-        }
-      ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(up.profileImg.getWidth(),up.profileImg.getHeight(),Image.SCALE_SMOOTH));
-       up.profileImg.setIcon(imageIcon); 
+       
+        User_Profile up = new User_Profile(uf);
+        System.out.println(uf.getLastName()+" login");
+       
         up.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_profileButtonActionPerformed
 
+    public  void Time(){
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                
+                 startingTimeTextField.setText(dateFormat.format(cal.getTime()));
+               }
+        }).start();
+    }
 
     
     public  ArrayList<UserSearchGetValue>OwnerList(){
@@ -346,9 +381,6 @@ public class User_Homepage extends javax.swing.JFrame {
 
             ResultSet rs = pst.executeQuery();
             
-
-           //Statement st  = connection.createStatement();
-            //ResultSet rs = st.executeQuery(query1);
         UserSearchGetValue usgv;
          while(rs.next()){
              usgv = new UserSearchGetValue(rs.getString("PhoneNumber"),rs.getString("FirstName"),rs.getString("Area"),rs.getString( "Sector"),rs.getString("RodeNumber"),rs.getString("HouseNumber"),rs.getInt("Price"));
@@ -401,7 +433,7 @@ public class User_Homepage extends javax.swing.JFrame {
         int i = User_Search_Table.getSelectedRow();
 
         TableModel model = User_Search_Table.getModel();
-
+        Time();
         ownerPhoneNumberTextField.setText(model.getValueAt(i,0).toString());
         // startingTimeTextField.setText(model.getValueAt(i,2).toString());
         // DurationTextField.setText(model.getValueAt(i,3).toString());
@@ -422,34 +454,104 @@ public class User_Homepage extends javax.swing.JFrame {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
          User_Search_Table.setModel(new DefaultTableModel(null,new String[]{ "Owner Phone Number", "Name", "Area", "Sector", "RodeNumber", "HouseNumber", "Price"}));
+         
+        ownerPhoneNumberTextField.setText(" ");
+        startingTimeTextField.setText(" ");
+        endingTimeTextField.setText(" ");
+        DurationTextField.setText(" ");
+        totalBillTextField.setText(" ");
+         
     }//GEN-LAST:event_refreshButtonActionPerformed
 
+    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+             Connection connection = DriverManager  
+                     .getConnection(  
+                             "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
+   
+        //String query1 = "insert into Owner(UserName,FirstName,LastName,Password,PhoneNumber,NIDNumber,Gender,ParkingSlots,Price,Images)values(?,?,?,?,?,?,?,?,?,?)";
+        
+        int row = User_Search_Table.getSelectedRow();
+        
+         String value = (User_Search_Table.getModel().getValueAt(row, 0).toString());
+        
+        //String value = ownerPhoneNumberTextField.getText();
+        String query = "update ParkingSlot set StartingTime = ? ,EndingTime = ? ,Duration = ? ,Reserved = 1, TotalBill = ? where PhoneNmber = "+value;
+        PreparedStatement pst = connection.prepareStatement(query);
+        
+       // pst.setString(1, ownerPhoneNumberTextField.getText());
+        
+        pst.setString(1, startingTimeTextField.getText());
+        pst.setString(2,endingTimeTextField.getText());
+        pst.setString(3, DurationTextField.getText());
+        
+        totalBill = (Integer.parseInt(priceTextField.getText()))*(Integer.parseInt(DurationTextField.getText()));
+        totalBillTextField.setText(Integer.toString(totalBill));
+         pst.setInt(4,Integer.parseInt(totalBillTextField.getText()));
+            System.out.println(totalBill+" "+value);
+       
+            
+            int OwnerId = 0,SlotId = 0;
+         String sql = "SELECT * FROM ParkingSlot where PhoneNmber = ?";
+         //PreparedStatement pst1 = connection.prepareStatement(sql);
+        // pst.setString(3,value);
+         //ResultSet rs = pst1.executeQuery();
+         //if(rs.next()){
+         // OwnerId = rs.getInt("OwnerId");
+          //SlotId = rs.getInt("SlotId");
+         //}
+
+         try (PreparedStatement pst1 = connection.prepareStatement(sql)) {
+             pst1.setString(1,value);
+    try (ResultSet rs = pst1.executeQuery()) {
+        if (rs.next()) { 
+            OwnerId = rs.getInt("OwnerId");
+            SlotId = rs.getInt("SloatId");
+        } 
+        else{
+            System.out.println("Company with ID: " + value + " could not be found\n"); 
+        }
+    }
+} catch (SQLException e) {   
+    System.out.println(e);  
+}  
+ 
+            pst.executeUpdate();
+
+            int UserID = uf.getUserID();
+         
+            System.out.println(OwnerId+SlotId+UserID);
+         
+         String query2 = "insert into Uses(SloatId,UserID,OwnerId,StartingTime,EndingTime,Duration,TotalBill)values(?,?,?,?,?,?,?)";
+         
+         PreparedStatement pst2 = connection.prepareStatement(query2);
+         
+         pst2.setInt(1,SlotId);
+         pst2.setInt(2,UserID);
+         pst2.setInt(3,OwnerId);
+         pst2.setString(4,startingTimeTextField.getText());
+         pst2.setString(5,endingTimeTextField.getText());
+         pst2.setString(6, DurationTextField.getText());
+         pst2.setInt(7,Integer.parseInt(totalBillTextField.getText()));
+ 
+         pst2.executeUpdate();
+  
+         JOptionPane.showMessageDialog(null,"Parking Slot is Booked ");
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+
+        
+        
+    }//GEN-LAST:event_doneButtonActionPerformed
+
+  
+    
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(User_Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(User_Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(User_Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(User_Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new User_Homepage().setVisible(true);
@@ -463,7 +565,9 @@ public class User_Homepage extends javax.swing.JFrame {
     private javax.swing.JTextField SectorTextField;
     private javax.swing.JTable User_Search_Table;
     private javax.swing.JTextField areaTextField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton doneButton;
+    private javax.swing.JTextField endingTimeTextField;
+    private javax.swing.JButton historyButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -471,6 +575,8 @@ public class User_Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
@@ -480,5 +586,6 @@ public class User_Homepage extends javax.swing.JFrame {
     private javax.swing.JButton refreshButton;
     private javax.swing.JTextField roadNumberTextField;
     private javax.swing.JTextField startingTimeTextField;
+    private javax.swing.JTextField totalBillTextField;
     // End of variables declaration//GEN-END:variables
 }

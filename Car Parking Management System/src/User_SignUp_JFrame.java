@@ -382,7 +382,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
         
         pst.executeUpdate();
         
-            JOptionPane.showMessageDialog(this, pst);
+            JOptionPane.showMessageDialog(this, "Sign Up Successfully");
             
             User_LogIn_JFrame ul = new User_LogIn_JFrame();
             ul.setVisible(true);

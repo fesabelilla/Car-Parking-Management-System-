@@ -476,7 +476,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
          while (resultSet.next()) {  
                    s =  resultSet.getString("OwnerId");
                    phoneNumber =  resultSet.getString("PhoneNumber");
-                   price = resultSet.getString("Price");
+                   //price = resultSet.getString("Price");
                   }  
         OwnersAddress(s); 
         OwnersParkingSlot(s,phoneNumber,price); 

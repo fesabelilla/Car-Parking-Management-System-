@@ -22,11 +22,14 @@ CREATE TABLE Users(
 	PRIMARY KEY(UserID,UserType) 
 );
 
+ALTER TABLE Users ADD UNIQUE(PhoneNumber);
+
 --DROP TABLE Users;
 --ALTER TABLE Users 
   -- ADD CONSTRAINT PK_CUSTID PRIMARY KEY (UserID, UserType);
 
 select* from Users;
+
 CREATE TABLE Owner(
     OwnerId int IDENTITY(2001,1) NOT NULL PRIMARY KEY,
     UserName varchar (50) NOT NULL,
@@ -41,7 +44,7 @@ CREATE TABLE Owner(
 	Images image not null 
 	
 );
-
+ALTER TABLE Owner ADD UNIQUE(PhoneNumber);
 --SELECT * FROM Owner;
 --DROP TABLE Owner;
 
@@ -87,23 +90,42 @@ Reserved int not null,
 Price decimal  null
 ); 
 
+
+ALTER TABLE ParkingSlot
+ADD  EndingTime varchar(50) null;
+
+ALTER TABLE ParkingSlot
+ADD  TotalBill decimal null;
+
+sp_rename 'ParkingSlot.EndingTimes', 'EndingTime', 'COLUMN';
+sp_rename 'ParkingSlot.Durations', 'Duration', 'COLUMN';
+
 ALTER TABLE ParkingSlot ADD CONSTRAINT Reserved DEFAULT 0 FOR Reserved;
 
 insert into ParkingSlot values (2001,'014897249','85873','3',' ',10);
 insert into ParkingSlot values (2002,'014897249','','',' ',10);
 
---update ParkingSlot set Reserved = 1 where OwnerId = 2001;
+update ParkingSlot set StartingTime = ' ',Duration = ' ',EndingTime = ' ',Reserved = 1, TotalBill = 0 where PhoneNmber = '01734089033';
+
+SELECT Owner.FirstName,Owner.PhoneNumber,ParkingSlot.StartingTime,ParkingSlot.EndingTime,ParkingSlot.Duration,ParkingSlot.TotalBill 
+Owner full JOIN ParkingSlot ON Owner.OwnerId = ParkingSlot.OwnerId;
+
+
+
+--update ParkingSlot set Reserved = 0 where OwnerId = 2001;
 
 
 --select * from ParkingSlot;
 --DROP TABLE ParkingSlot;
 
+
+
 CREATE TABLE Uses(
+SlotId int IDENTITY(4001,1) NOT NULL PRIMARY KEY,
 Users int NOT NULL FOREIGN KEY REFERENCES  Users(UserID),
-Users int NOT NULL FOREIGN KEY REFERENCES  Users(UserType),
 OwnerId int NOT NULL FOREIGN KEY REFERENCES  Owner(OwnerId),
 Time varchar(50) null,
-SlotId int IDENTITY(4001,1) NOT NULL PRIMARY KEY,
+Price decimal  null
 );
 
 
