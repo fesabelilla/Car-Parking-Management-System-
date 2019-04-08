@@ -101,6 +101,7 @@ public class User_ControlPanel_JFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
 
+        user_controlPanel_Table.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         user_controlPanel_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

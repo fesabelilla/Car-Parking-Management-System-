@@ -145,6 +145,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        ownerControlpanel_Table.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ownerControlpanel_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -163,6 +164,7 @@ public class Owner_ControlPanel_JFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("                          Owner Control Panel");
 
+        Owner_address_Table.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Owner_address_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -26,9 +26,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
               <Component id="UserControlPanelButton" min="-2" pref="204" max="-2" attributes="0"/>
-              <EmptySpace pref="238" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Component id="OwnerControlPanelButton" min="-2" pref="168" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+              <EmptySpace pref="97" max="32767" attributes="0"/>
+              <Component id="bookedSlotButton" min="-2" pref="153" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
           </Group>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -41,6 +43,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="UserControlPanelButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="OwnerControlPanelButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                  <Component id="bookedSlotButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="100" max="32767" attributes="0"/>
           </Group>
@@ -80,10 +83,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="387" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="190" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,5 +114,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="bookedSlotButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Slot Booked"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bookedSlotButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
