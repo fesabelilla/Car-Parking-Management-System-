@@ -492,6 +492,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="History"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historyButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

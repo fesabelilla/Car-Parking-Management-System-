@@ -146,10 +146,26 @@ public class User_LogIn_JFrame extends javax.swing.JFrame {
                 USERPROFILE_FINAL uf = new USERPROFILE_FINAL(UserName, FirstName, LastName, Password, PhoneNumber, LicenceNumber, NIDNumber, Gender, UserType, img,UserID);
                
                 System.out.println(uf.getLastName()+" login");
+                 
+                UserHistory uhh = null;
+                String str = "Select Owner.FirstName,Uses.StartingTime ,Uses.EndingTime,Uses.Duration,Uses.TotalBill from Uses full join Owner on Owner.OwnerId = Uses.OwnerId where Uses.UserID = ?";
                 
-                
-                
-               User_Homepage uh = new User_Homepage(uf);
+                PreparedStatement pst1 = con.prepareStatement(str);
+                pst1.setInt(1, UserID);
+               rs = pst1.executeQuery();
+              if(rs.next()){
+               String OwnerFirstName = rs.getString("FirstName") ;
+               String StartingTime = rs.getString("StartingTime"); 
+               String EndingTime  = rs.getString("EndingTime");
+               int Duration = rs.getInt("Duration");
+               Double TotalBill = rs.getDouble("TotalBill") ;
+               
+                uhh =  new UserHistory(OwnerFirstName, StartingTime, EndingTime, Duration, TotalBill);
+               
+               }
+   
+               User_Homepage uh = new User_Homepage(uf,uhh);
+               
                uh.setVisible(true);
                 setVisible(false);
             }

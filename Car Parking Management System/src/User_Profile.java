@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 public class User_Profile extends javax.swing.JFrame {
 
     USERPROFILE_FINAL uf;
+    UserHistory uhh;
     
         
         public User_Profile() {
@@ -17,19 +18,17 @@ public class User_Profile extends javax.swing.JFrame {
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);
     }
 
-    User_Profile(USERPROFILE_FINAL uf) {
+    public User_Profile(USERPROFILE_FINAL uf,UserHistory uhh ) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         initComponents();
         this.uf= uf;
+       this.uhh = uhh;
         ShowProfile();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);
-    
-    
+
     }
-        
-     
 
     public  void ShowProfile(){ 
         
@@ -342,7 +341,7 @@ public class User_Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_monthlyBasedRadioButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        User_Homepage uh = new User_Homepage(uf);
+        User_Homepage uh = new User_Homepage(uf,uhh);
         uh.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_BackButtonActionPerformed

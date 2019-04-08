@@ -25,6 +25,7 @@ import javax.swing.table.TableRowSorter;
 
 public class User_Homepage extends javax.swing.JFrame {
 USERPROFILE_FINAL uf ;
+UserHistory uhh;
    
 int totalBill;
 
@@ -38,18 +39,20 @@ int UserID;
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);  
     }
 
-   public User_Homepage(USERPROFILE_FINAL uf) {
+   public User_Homepage(USERPROFILE_FINAL uf,UserHistory uhh) {
        
         initComponents();
         this.uf= uf;
+       this.uhh = uhh;
        
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);  
     }
 
-    
-  
+
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,6 +203,11 @@ int UserID;
 
         historyButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         historyButton.setText("History");
+        historyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -340,7 +348,7 @@ int UserID;
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
        
-        User_Profile up = new User_Profile(uf);
+        User_Profile up = new User_Profile(uf,uhh);
         System.out.println(uf.getLastName()+" login");
        
         up.setVisible(true);
@@ -476,13 +484,10 @@ int UserID;
         int row = User_Search_Table.getSelectedRow();
         
          String value = (User_Search_Table.getModel().getValueAt(row, 0).toString());
-        
-        //String value = ownerPhoneNumberTextField.getText();
         String query = "update ParkingSlot set StartingTime = ? ,EndingTime = ? ,Duration = ? ,Reserved = 1, TotalBill = ? where PhoneNmber = "+value;
         PreparedStatement pst = connection.prepareStatement(query);
         
-       // pst.setString(1, ownerPhoneNumberTextField.getText());
-        
+      
         pst.setString(1, startingTimeTextField.getText());
         pst.setString(2,endingTimeTextField.getText());
         pst.setString(3, DurationTextField.getText());
@@ -495,13 +500,7 @@ int UserID;
             
             int OwnerId = 0,SlotId = 0;
          String sql = "SELECT * FROM ParkingSlot where PhoneNmber = ?";
-         //PreparedStatement pst1 = connection.prepareStatement(sql);
-        // pst.setString(3,value);
-         //ResultSet rs = pst1.executeQuery();
-         //if(rs.next()){
-         // OwnerId = rs.getInt("OwnerId");
-          //SlotId = rs.getInt("SlotId");
-         //}
+         
 
          try (PreparedStatement pst1 = connection.prepareStatement(sql)) {
              pst1.setString(1,value);
@@ -546,6 +545,12 @@ int UserID;
         
         
     }//GEN-LAST:event_doneButtonActionPerformed
+
+    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
+        UserHistry Uhh = new UserHistry(uf,uhh);
+        Uhh.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_historyButtonActionPerformed
 
   
     
