@@ -169,13 +169,13 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("House Number");
 
-        areaTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        areaTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        houseNumberTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        houseNumberTextField2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        rodeNumberTextField3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rodeNumberTextField3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        sectorTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        sectorTextField4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         doneButton.setBackground(new java.awt.Color(102, 102, 0));
         doneButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -287,18 +287,22 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(imglbl, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(imgChooseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(sectorTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(imglbl, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(imgChooseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addComponent(areaTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(areaTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rodeNumberTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(houseNumberTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sectorTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(73, 73, 73))
+                                    .addComponent(houseNumberTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rodeNumberTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -472,7 +476,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         
         String s = null ;
         String phoneNumber = null;
-        String price = null;
+            int price = Integer.parseInt(price_TextFielid.getText());
          while (resultSet.next()) {  
                    s =  resultSet.getString("OwnerId");
                    phoneNumber =  resultSet.getString("PhoneNumber");
@@ -482,6 +486,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         OwnersParkingSlot(s,phoneNumber,price); 
         
  
+            System.out.println(price+"  ");
          JOptionPane.showMessageDialog(this, "SignUp Successfully");
           
          Owner_LogIn_JFrame ol = new Owner_LogIn_JFrame();
@@ -526,7 +531,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         }
     
     
-    public  void OwnersParkingSlot(String s,String phoneNumber,String Price){
+    public  void OwnersParkingSlot(String s,String phoneNumber,int Price){
          
         try{
             
@@ -545,8 +550,8 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
          pst3.setString(3," ");
          pst3.setString(4," ");
          pst3.setInt(5,0);
-         pst3.setString(6,Price);
-         
+         pst3.setInt(6,Price);
+            
           pst3.executeUpdate();
         
         }catch(Exception e){

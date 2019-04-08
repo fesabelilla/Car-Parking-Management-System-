@@ -24,9 +24,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
               <Component id="UserControlPanelButton" min="-2" pref="204" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
               <Component id="OwnerControlPanelButton" min="-2" pref="168" max="-2" attributes="0"/>
               <EmptySpace pref="97" max="32767" attributes="0"/>
               <Component id="bookedSlotButton" min="-2" pref="153" max="-2" attributes="0"/>
@@ -39,13 +39,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="UserControlPanelButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="OwnerControlPanelButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="bookedSlotButton" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="100" max="32767" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

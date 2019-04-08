@@ -28,7 +28,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="BackButton" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace pref="789" max="32767" attributes="0"/>
+                      <EmptySpace pref="745" max="32767" attributes="0"/>
                       <Component id="LogOutButton" min="-2" pref="176" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
@@ -71,18 +71,16 @@
                                       <Component id="userNameTextField" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="ParkingSlotsTextField" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="maleRadioButton" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="femaleRadioButton" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="ParkingSlotsTextField" min="-2" pref="182" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Component id="jLabel12" min="-2" pref="110" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="slotPriceTextField" min="-2" pref="164" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="maleRadioButton" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="femaleRadioButton" min="-2" pref="108" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>

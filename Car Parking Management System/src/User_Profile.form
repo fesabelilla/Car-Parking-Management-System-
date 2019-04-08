@@ -27,13 +27,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="BackButton" min="-2" pref="114" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
@@ -45,37 +41,42 @@
                           <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
-                              <Component id="hourBasedRadioButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="monthlyBasedRadioButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="passwordTextField" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="maleRadioButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="femaleRadioButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="nidNumberTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="phoneNumberTextField" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="licenceNumberTextField" alignment="1" min="-2" pref="229" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                              <EmptySpace min="145" pref="145" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="passwordTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="maleRadioButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="femaleRadioButton" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="nidNumberTextField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="phoneNumberTextField" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="licenceNumberTextField" alignment="1" min="-2" pref="229" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="firstNameTextField" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
                                   <Component id="userNameTextField" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
                                   <Component id="lastNameTextField" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                              <Component id="hourBasedRadioButton" min="-2" pref="143" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="monthlyBasedRadioButton" min="-2" pref="174" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+                      <Component id="updateButton" min="-2" pref="156" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -140,6 +141,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="BackButton" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="updateButton" min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -226,7 +231,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Gender"/>
+        <Property name="text" type="java.lang.String" value="*Gender"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
@@ -335,7 +340,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="User Name"/>
+        <Property name="text" type="java.lang.String" value="*User Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -367,7 +372,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Phone Number"/>
+        <Property name="text" type="java.lang.String" value="*Phone Number"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -375,7 +380,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Licence Number"/>
+        <Property name="text" type="java.lang.String" value="*Licence Number"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
@@ -383,7 +388,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="NID Number"/>
+        <Property name="text" type="java.lang.String" value="*NID Number"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BackButton">
@@ -395,6 +400,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="updateButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Update"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -83,7 +83,7 @@ public class UserHistry extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        userHistoryTable.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        userHistoryTable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         userHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

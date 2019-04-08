@@ -2,7 +2,11 @@
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class User_Profile extends javax.swing.JFrame {
 
@@ -87,6 +91,7 @@ public class User_Profile extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +135,7 @@ public class User_Profile extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Gender");
+        jLabel8.setText("*Gender");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("User Type");
@@ -182,7 +187,7 @@ public class User_Profile extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("User Name");
+        jLabel3.setText("*User Name");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("First Name");
@@ -194,19 +199,27 @@ public class User_Profile extends javax.swing.JFrame {
         jLabel6.setText("Password");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Phone Number");
+        jLabel7.setText("*Phone Number");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Licence Number");
+        jLabel11.setText("*Licence Number");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("NID Number");
+        jLabel12.setText("*NID Number");
 
         BackButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
+            }
+        });
+
+        updateButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
             }
         });
 
@@ -218,12 +231,9 @@ public class User_Profile extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(logoutButton)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -234,30 +244,35 @@ public class User_Profile extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(213, 213, 213)
-                                .addComponent(hourBasedRadioButton)
-                                .addGap(25, 25, 25)
-                                .addComponent(monthlyBasedRadioButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(145, 145, 145)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(passwordTextField)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(maleRadioButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(femaleRadioButton))
-                                    .addComponent(nidNumberTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phoneNumberTextField)
-                                    .addComponent(licenceNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(145, 145, 145)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(passwordTextField)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(maleRadioButton)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(femaleRadioButton))
+                                        .addComponent(nidNumberTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(phoneNumberTextField)
+                                        .addComponent(licenceNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(58, 58, 58))))
+                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(216, 216, 216))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(213, 213, 213)
+                                .addComponent(hourBasedRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(monthlyBasedRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logoutButton)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +325,10 @@ public class User_Profile extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -345,6 +363,49 @@ public class User_Profile extends javax.swing.JFrame {
         uh.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        int UserId = uf.getUserID();
+        String userType = null;
+        
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure to update ? ", "Delete ", JOptionPane.YES_NO_OPTION);
+        
+        if(opt == 0){
+        try{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+             Connection connection = DriverManager  
+                     .getConnection(  
+                             "jdbc:sqlserver://localhost:1433;databaseName=Car_Parking_Management_System;selectMethod=cursor",   "sa", "123456");  
+
+             String query = "update Users set FirstName = ?,LastName = ?,Password = ?,UserType = ? where UserID = "+UserId;
+        
+        PreparedStatement pst = connection.prepareStatement(query);
+       
+       pst.setString(1, firstNameTextField.getText());
+       pst.setString(2, lastNameTextField.getText());
+       pst.setString(3,passwordTextField.getText());
+ 
+        if(hourBasedRadioButton.isSelected()){
+           userType = "Hour Baser";
+       }
+      else if(monthlyBasedRadioButton.isSelected()){
+           userType = "Monthly Based";
+       }
+       
+        pst.setString(4,userType);
+        
+        
+        pst.executeUpdate();
+        
+            JOptionPane.showMessageDialog(this, "Update Successfully");
+            
+        }
+        
+        catch(Exception e){
+            e.printStackTrace();  
+        }
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
 
    
     public static void main(String args[]) {
@@ -381,6 +442,7 @@ public class User_Profile extends javax.swing.JFrame {
     private javax.swing.JTextField passwordTextField;
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JLabel profileImg;
+    private javax.swing.JButton updateButton;
     private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }

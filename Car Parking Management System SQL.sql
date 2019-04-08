@@ -8,7 +8,7 @@ alter login sa enable
 Use  Car_Parking_Management_System;
 
 CREATE TABLE Users(
-	UserID int IDENTITY(1001,1) NOT NULL ,
+	UserID int IDENTITY(1001,1) NOT NULL PRIMARY KEY ,
 	UserName varchar (50) NOT NULL,
 	FirstName varchar (50) NOT NULL,
 	LastName varchar (50) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE Users(
 	Gender varchar (10) not null,
 	UserType varchar (50) not null,
     Images image not null,
-	PRIMARY KEY(UserID,UserType) 
+	
 );
 
 ALTER TABLE Users ADD UNIQUE(PhoneNumber);
@@ -87,9 +87,11 @@ PhoneNmber varchar(11) not null,
 StartingTime varchar(50) null,
 Duration varchar(10) null,
 Reserved int not null,
-Price decimal  null
+Price decimal  null,
 ); 
 
+--select * from ParkingSlot;
+--DROP TABLE ParkingSlot;
 
 ALTER TABLE ParkingSlot
 ADD  EndingTime varchar(50) null;
@@ -100,33 +102,45 @@ ADD  TotalBill decimal null;
 sp_rename 'ParkingSlot.EndingTimes', 'EndingTime', 'COLUMN';
 sp_rename 'ParkingSlot.Durations', 'Duration', 'COLUMN';
 
+
 ALTER TABLE ParkingSlot ADD CONSTRAINT Reserved DEFAULT 0 FOR Reserved;
 
 insert into ParkingSlot values (2001,'014897249','85873','3',' ',10);
 insert into ParkingSlot values (2002,'014897249','','',' ',10);
 
-update ParkingSlot set StartingTime = ' ',Duration = ' ',EndingTime = ' ',Reserved = 1, TotalBill = 0 where PhoneNmber = '01734089033';
+update ParkingSlot set StartingTime = ' ',Duration = ' ',EndingTime = ' ',Reserved = 0, TotalBill = 0 where PhoneNmber='01734089033';
 
-SELECT Owner.FirstName,Owner.PhoneNumber,ParkingSlot.StartingTime,ParkingSlot.EndingTime,ParkingSlot.Duration,ParkingSlot.TotalBill 
-Owner full JOIN ParkingSlot ON Owner.OwnerId = ParkingSlot.OwnerId;
+--user history
+--SELECT Owner.FirstName,Owner.PhoneNumber,ParkingSlot.StartingTime,ParkingSlot.EndingTime,ParkingSlot.Duration,ParkingSlot.TotalBill from
+--Owner full JOIN ParkingSlot ON Owner.OwnerId = ParkingSlot.OwnerId;
 
-
+SELECT OwnerId,SloatId FROM ParkingSlot where PhoneNmber = '01734089033';
 
 --update ParkingSlot set Reserved = 0 where OwnerId = 2001;
 
-
---select * from ParkingSlot;
---DROP TABLE ParkingSlot;
-
-
-
 CREATE TABLE Uses(
-SlotId int IDENTITY(4001,1) NOT NULL PRIMARY KEY,
-Users int NOT NULL FOREIGN KEY REFERENCES  Users(UserID),
+SloatId int NOT NULL FOREIGN KEY REFERENCES ParkingSlot(SloatId) ,
+UserID int NOT NULL FOREIGN KEY REFERENCES Users(UserID),
 OwnerId int NOT NULL FOREIGN KEY REFERENCES  Owner(OwnerId),
-Time varchar(50) null,
-Price decimal  null
+StartingTime varchar(50) null,
+EndingTime varchar(50) null,
+Duration int null,
+TotalBill decimal  null
 );
+
+SELECT * from Uses;
+Drop table Uses;
+
+--SELECT ParkingSlot.OwnerId,ParkingSlot.SloatId,Users.UserID from
+--ParkingSlot full JOIN Users ON Users.UserID = ParkingSlot.User;
+--INSERT INTO Uses VALUES (4003,1001,2003,'13:09:24','14:09:00',1,10);
+
+Select Owner.FirstName , Uses.StartingTime ,Uses.EndingTime,Uses.Duration,Uses.TotalBill 
+from Uses full join Owner on Owner.OwnerId = Uses.OwnerId where Uses.UserID =1001;
+
+--select ParkingSlot.PhoneNmber from ParkingSlot full join Uses on Uses.OwnerId = ParkingSlot.OwnerId;
+
+
 
 
 
