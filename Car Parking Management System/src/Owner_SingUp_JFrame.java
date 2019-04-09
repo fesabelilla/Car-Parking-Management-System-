@@ -120,6 +120,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         jLabel2.setText("First Name");
 
         imglbl.setBackground(new java.awt.Color(51, 204, 0));
+        imglbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Last Name");
@@ -205,7 +206,7 @@ public class Owner_SingUp_JFrame extends javax.swing.JFrame {
         jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("                                                               Sign Up");
+        jLabel12.setText("                                                               Owner Sign Up");
         jLabel12.setFocusable(false);
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel12.setIconTextGap(6);

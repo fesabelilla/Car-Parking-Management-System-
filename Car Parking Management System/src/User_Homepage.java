@@ -548,6 +548,7 @@ int UserID;
 
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
         UserHistry Uhh = new UserHistry(uf,uhh);
+        Uhh.show_Users();
         Uhh.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_historyButtonActionPerformed

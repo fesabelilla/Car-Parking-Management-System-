@@ -154,6 +154,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
 
         imglbl.setBackground(new java.awt.Color(130, 107, 135));
         imglbl.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        imglbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         imgChooseButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         imgChooseButton.setText("Choose");
@@ -175,7 +176,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("  Sign Up");
+        jLabel11.setText("User  Sign Up");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,7 +184,7 @@ public class User_SignUp_JFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(352, 352, 352)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

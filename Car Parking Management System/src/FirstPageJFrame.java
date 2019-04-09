@@ -48,7 +48,7 @@ public class FirstPageJFrame extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 0, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("                             Car Park Kori ");
+        jLabel1.setText("                             Car Parking");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

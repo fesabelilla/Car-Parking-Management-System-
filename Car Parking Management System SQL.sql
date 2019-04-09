@@ -18,11 +18,11 @@ CREATE TABLE Users(
 	NIDNumber varchar (50) not null,
 	Gender varchar (10) not null,
 	UserType varchar (50) not null,
-    Images image not null,
-	
+    Images image not null,	
 );
 
 ALTER TABLE Users ADD UNIQUE(PhoneNumber);
+ALTER TABLE Users ADD UNIQUE(UserName);
 
 --DROP TABLE Users;
 --ALTER TABLE Users 
@@ -45,6 +45,7 @@ CREATE TABLE Owner(
 	
 );
 ALTER TABLE Owner ADD UNIQUE(PhoneNumber);
+ALTER TABLE Owner ADD UNIQUE( UserName);
 --SELECT * FROM Owner;
 --DROP TABLE Owner;
 
@@ -57,8 +58,6 @@ RodeNumber VARCHAR(50) NOT NULL,
 HouseNumber VARCHAR(50) NOT NULL
 ); 
 
---INSERT INTO OwnersAddress VALUES (2002,'Niketan','NiketanBazar','32b','339bc');
---INSERT INTO OwnersAddress VALUES (2002,'Niketan','Niketan Bazar','32b','339bc');
 --SELECT * FROM OwnersAddress;
 --DROP TABLE OwnersAddress;
 
@@ -74,10 +73,6 @@ where OwnersAddress.Area = 'Modhubagh' and Owner.OwnerId  in (select OwnerId fro
 
 
 SELECT OwnersAddress.OwnerId,AddressId,Area,Sector,RodeNumber,HouseNumber FROM OwnersAddress LEFT JOIN Owner ON OwnersAddress.OwnerId = Owner.OwnerId;
-
-
-SELECT OwnersAddress.OwnerId,Owner.OwnerId FROM OwnersAddress LEFT JOIN Owner ON OwnersAddress.OwnerId = Owner.OwnerId;
-
 
 
 CREATE TABLE  ParkingSlot(

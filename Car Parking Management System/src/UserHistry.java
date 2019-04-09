@@ -24,7 +24,7 @@ public class UserHistry extends javax.swing.JFrame {
     initComponents();
     this.uhh = uhh;
     this.uf = uf;
-    show_Users();
+    //show_Users();
     Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2-getWidth()/2,size.height/2 - getHeight()/2);   
